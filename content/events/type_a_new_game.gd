@@ -31,7 +31,7 @@ func run(context: EventContext) -> GDScript:
 	await Era.print_wait("好的，我当然知道你在想什么~")
 	await Era.print_wait("这么可爱的女孩，你可得好生疼爱一番呢")
 	await Era.print_wait("当然~是哪一方面的疼爱呢？")
-	await Era.print_wait("🎶我就不知道了咯🎶")
+	await Era.print_wait("♪我就不知道了咯♪")
 	
 	Era.print_gap()
 	await Era.print_wait("咳咳，闲话就说到这里")

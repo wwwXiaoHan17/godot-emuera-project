@@ -1,0 +1,42 @@
+{
+ "out": "E:\\MyCode\\GodotCode\\my-test\\assets\\fonts\\GEMono-SC.ttf",
+ "bytes": 2136272,
+ "upem": 1000,
+ "hhea_asc": 880,
+ "hhea_desc": -400,
+ "lineGap": 60,
+ "charset": 8730,
+ "cmap": 8424,
+ "missing": 310,
+ "missing_chars": "‎‏‪‫‬‭‮⁥⁦⁧⁨⁩⁪⁫⁬⁭⁮⁯☄☈☊☋☌☍☔☕☘☙☚☛☠☡☢☣☤☥☧☩☪☫☬☭☮☸☽☾♃♄♅♆♇♈♉♊♋♌♍♎♏♐♑♒♓♔♕♖♗♘♙♚♛♜♝♞♟♰♱♾♿⚈⚉⚒⚓⚔⚕⚖⚗⚘⚚⚜⚝⚞⚟⚢⚣⚤⚥⚦⚧⚨⚩⚭⚮⚯⚰⚱⚳⚴⚵⚶⚷⚸⚹⚺⚻⚼⚿⛀⛁⛂⛃⛄⛅⛆⛇⛈⛉⛊⛋⛌⛍⛎⛏⛐⛑⛒⛓⛔⛕⛖⛗⛘⛙⛚⛛⛜⛝⛞⛟⛠⛡⛢⛣⛤⛥⛦⛧⛨⛩⛪⛫⛬⛰⛱⛲⛳⛴⛵⛷⛸⛹⛺⛻⛼⛽⛾⛿✀✁✃✄✅✆✇✈✉✊✋✌✍✑✒✙✛✜✞✠✡✢✣✤✥✨✩✪✫✬✭✮✯✰✲✵✻✼✾❁❂❃❄❅❆❇❈❉❊❋❍❎❏❐❑❒❓❔❕❗❛❜❝❞❟❠❡❢❣❥❦❧❨❩❪❫❲❳❴❵➕➖➗➘➙➚➛➞➟➠➧➨➩➪➫➬➭➮➯➰➱➲➳➴➵➶➷➸➹➺➻➼➽➾➿぀゗゘＀﾿￀￁￈￉￐￑￘￙￝￞￟￧￯",
+ "advance_fixed_full": 155,
+ "advance_fixed_half": 145,
+ "advance_skipped_nonbinary": 0,
+ "advance_native_kept": 2538,
+ "notdef_full_width": true,
+ "bad_advances": [],
+ "bad_advance_count": 0,
+ "tables": [
+  "GlyphOrder",
+  "OS/2",
+  "cmap",
+  "gasp",
+  "glyf",
+  "head",
+  "hhea",
+  "hmtx",
+  "loca",
+  "maxp",
+  "name",
+  "post",
+  "vhea",
+  "vmtx"
+ ],
+ "name": {
+  "1": "GE Mono SC",
+  "4": "GE Mono SC",
+  "6": "GEMonoSC-Regular",
+  "13": "SIL Open Font License"
+ },
+ "charset_txt": "E:\\MyCode\\GodotCode\\my-test\\tools\\font\\charset.txt"
+}

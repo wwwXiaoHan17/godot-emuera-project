@@ -16,6 +16,8 @@ signal picked(id: int)
 ## 选择项被点击；内容可以接这个信号处理互斥、上限等业务规则。
 signal toggled(id: int, selected: bool)
 
+const FontGuard := preload("res://engine/font_guard.gd")
+
 var _palette: EraPalette
 var _buttons: Dictionary = {}   # id -> Button
 var _states: Dictionary = {}    # id -> {text, kind, selected, disabled}
@@ -38,6 +40,7 @@ func setup(items: Array, columns: int, available_width: float) -> void:
 	for item in items:
 		if not (item is Dictionary):
 			continue
+		FontGuard.check(self, str(item.get("text", "")))
 		var kind := str(item.get("kind", "action"))
 		if kind == "text":
 			_add_text_cell(item)

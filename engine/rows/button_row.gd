@@ -8,6 +8,8 @@ extends Button
 
 signal picked(id: int)
 
+const FontGuard := preload("res://engine/font_guard.gd")
+
 var _id: int = -1
 
 
@@ -18,6 +20,7 @@ func _ready() -> void:
 ## 设置按钮文字、编号和对齐方式。
 ## [param align] 直接用 Godot 的 [enum HorizontalAlignment]。
 func setup(text: String, id: int, align: HorizontalAlignment) -> void:
+	FontGuard.check(self, text)
 	_id = id
 	self.flat = true
 	self.text = "[%d] %s" % [id, text]

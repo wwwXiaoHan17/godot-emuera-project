@@ -9,6 +9,8 @@ extends MarginContainer
 ## [br][br]
 ## 本部件不认识游戏状态。
 
+const FontGuard := preload("res://engine/font_guard.gd")
+
 @onready var _label: Label = $Label
 @onready var _rich: RichTextLabel = $RichTextLabel
 
@@ -18,6 +20,7 @@ extends MarginContainer
 ## [param align] 直接用 Godot 的 [enum HorizontalAlignment]：
 ## [code]HORIZONTAL_ALIGNMENT_LEFT[/code] 、 [code]HORIZONTAL_ALIGNMENT_CENTER[/code] 、 [code]HORIZONTAL_ALIGNMENT_RIGHT[/code]。
 func setup(text: String, color: Color, align: HorizontalAlignment) -> void:
+	FontGuard.check(self, text)
 	var has_bbcode := text.contains("[")
 	_label.visible = not has_bbcode
 	_rich.visible = has_bbcode
