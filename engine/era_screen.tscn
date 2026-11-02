@@ -1,0 +1,49 @@
+[gd_scene format=3 uid="uid://drn83yc4u6j4k"]
+
+[ext_resource type="Script" uid="uid://deeudp1weo8xw" path="res://engine/era_screen.gd" id="1_screen"]
+
+[node name="EraScreen" type="Control" unique_id=1035778187]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_screen")
+
+[node name="Background" type="ColorRect" parent="." unique_id=1785861565]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 1)
+
+[node name="Margin" type="MarginContainer" parent="." unique_id=585229156]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 24
+theme_override_constants/margin_top = 16
+theme_override_constants/margin_right = 24
+theme_override_constants/margin_bottom = 16
+
+[node name="Scroll" type="ScrollContainer" parent="Margin" unique_id=1075257567]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_vertical = 3
+horizontal_scroll_mode = 3
+
+[node name="Rows" type="VBoxContainer" parent="Margin/Scroll" unique_id=513142978]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Slot" type="Control" parent="Margin" unique_id=2033440523]
+unique_name_in_owner = true
+visible = false
+layout_mode = 2

@@ -1,0 +1,6 @@
+[gd_scene format=3 uid="uid://8cw6gmaosb6r"]
+
+[ext_resource type="Script" uid="uid://c6qgax340bosn" path="res://tests/check_era_screen.gd" id="1_check"]
+
+[node name="CheckEraScreen" type="Node" unique_id=2142083072]
+script = ExtResource("1_check")

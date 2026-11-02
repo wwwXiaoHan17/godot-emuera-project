@@ -1,0 +1,7 @@
+# CSV 角色定义 v1：女儿样例（含 LifeComponent 字段与 flag 行）
+id,daughter
+名字,阿丽丝
+称呼,小丽丝
+组件,LifeComponent,value=80,max_value=120
+flag,cute,5
+flag,anger,2

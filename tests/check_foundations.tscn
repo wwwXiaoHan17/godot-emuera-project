@@ -1,0 +1,6 @@
+[gd_scene format=3 uid="uid://dxgint73nftmi"]
+
+[ext_resource type="Script" uid="uid://cdy35fxfoyv3s" path="res://tests/check_foundations.gd" id="1_check"]
+
+[node name="CheckFoundations" type="Node" unique_id=1180012676]
+script = ExtResource("1_check")

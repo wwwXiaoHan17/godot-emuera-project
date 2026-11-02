@@ -1,0 +1,9 @@
+[gd_resource type="Resource" script_class="TalentData" format=3 uid="uid://btwyep02d0vq8"]
+
+[ext_resource type="Script" uid="uid://cc447631w1fbp" path="res://scripts/base_resource/talent_data.gd" id="1_talent"]
+
+[resource]
+script = ExtResource("1_talent")
+talent_name = &"weak_bladder"
+display_name = "易漏尿"
+metadata/_custom_type_script = "uid://cc447631w1fbp"

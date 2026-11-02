@@ -1,0 +1,6 @@
+# CSV 角色定义 v1：女仆样例（含未知行，加载时跳过并警告）
+id,maid
+名字,小梅
+称呼,梅姐
+组件,StaminaComponent,value=70
+foo,bar,baz

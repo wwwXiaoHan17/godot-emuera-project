@@ -1,0 +1,57 @@
+[gd_resource type="Theme" format=3 uid="uid://dpt7inruqxel2"]
+
+[ext_resource type="FontFile" uid="uid://cxdlnvgalu4i5" path="res://assets/fonts/MS Gothic.ttf" id="1_wpdpu"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_wpdpu"]
+content_margin_left = 4.0
+content_margin_top = 4.0
+content_margin_right = 4.0
+content_margin_bottom = 4.0
+bg_color = Color(0.47007585, 0.47007585, 0.47007585, 1)
+border_width_bottom = 2
+border_color = Color(0, 0, 0, 0.6)
+corner_radius_top_left = 3
+corner_radius_top_right = 3
+corner_radius_bottom_right = 3
+corner_radius_bottom_left = 3
+corner_detail = 5
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_12vhp"]
+content_margin_left = 2.0
+content_margin_top = 2.0
+content_margin_right = 2.0
+content_margin_bottom = 2.0
+bg_color = Color(0.1, 0.1, 0.1, 0.3)
+corner_detail = 6
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_0732w"]
+content_margin_left = 2.0
+content_margin_top = 2.0
+content_margin_right = 2.0
+content_margin_bottom = 2.0
+bg_color = Color(1, 1, 1, 0.4)
+corner_detail = 6
+
+[resource]
+default_font = ExtResource("1_wpdpu")
+default_font_size = 16
+Button/colors/font_hover_color = Color(0.9490196, 0.9490196, 0, 1)
+Button/colors/font_pressed_color = Color(0.9490196, 0.9490196, 0, 1)
+Button/styles/disabled = null
+Button/styles/disabled_mirrored = null
+Button/styles/focus = null
+Button/styles/hover = null
+Button/styles/hover_mirrored = null
+Button/styles/hover_pressed = null
+Button/styles/hover_pressed_mirrored = null
+Button/styles/normal = null
+Button/styles/normal_mirrored = null
+Button/styles/pressed = null
+Button/styles/pressed_mirrored = null
+CheckBox/colors/font_pressed_color = Color(0.4, 1, 1, 1)
+CheckBox/icons/checked = null
+GridContainer/constants/h_separation = 4
+GridContainer/constants/v_separation = 2
+LineEdit/styles/normal = SubResource("StyleBoxFlat_wpdpu")
+ProgressBar/styles/background = SubResource("StyleBoxFlat_12vhp")
+ProgressBar/styles/fill = SubResource("StyleBoxFlat_0732w")

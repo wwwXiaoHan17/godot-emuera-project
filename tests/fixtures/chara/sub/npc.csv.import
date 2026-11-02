@@ -1,0 +1,16 @@
+[remap]
+
+importer="csv_translation"
+type="Translation"
+uid="uid://babyp5v14gms"
+
+[deps]
+
+source_file="res://tests/fixtures/chara/sub/npc.csv"
+
+[params]
+
+compress=1
+delimiter=0
+unescape_keys=false
+unescape_translations=true

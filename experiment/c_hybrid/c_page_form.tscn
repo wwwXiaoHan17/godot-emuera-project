@@ -1,0 +1,106 @@
+[gd_scene format=3 uid="uid://ibmfq0gvdpem"]
+
+[ext_resource type="Script" uid="uid://bbglr2okqr6o2" path="res://experiment/c_hybrid/c_page_form.gd" id="1_f"]
+
+[node name="CPageForm" type="Control" unique_id=1537708617]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_f")
+
+[node name="Background" type="ColorRect" parent="." unique_id=372251460]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 1)
+
+[node name="Center" type="CenterContainer" parent="." unique_id=707293611]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBox" type="VBoxContainer" parent="Center" unique_id=2070692548]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="Title" type="Label" parent="Center/VBox" unique_id=498135843]
+layout_mode = 2
+text = "创 建 你 的 角 色"
+horizontal_alignment = 1
+
+[node name="Hint" type="Label" parent="Center/VBox" unique_id=1214008818]
+modulate = Color(1, 1, 1, 0.55)
+layout_mode = 2
+text = "（这是一块 .tscn 页面，被引擎插进壳里；它自己也能 F6 单独跑）"
+horizontal_alignment = 1
+
+[node name="NameRow" type="HBoxContainer" parent="Center/VBox" unique_id=352056588]
+layout_mode = 2
+
+[node name="NameLabel" type="Label" parent="Center/VBox/NameRow" unique_id=762799488]
+layout_mode = 2
+text = "名字："
+
+[node name="NameEdit" type="LineEdit" parent="Center/VBox/NameRow" unique_id=471931974]
+unique_name_in_owner = true
+layout_mode = 2
+text = "阿丽丝"
+expand_to_text_length = true
+
+[node name="AgeRow" type="HBoxContainer" parent="Center/VBox" unique_id=640878426]
+layout_mode = 2
+
+[node name="AgeLabel" type="Label" parent="Center/VBox/AgeRow" unique_id=441626770]
+layout_mode = 2
+text = "年龄："
+
+[node name="Minus" type="Button" parent="Center/VBox/AgeRow" unique_id=656521506]
+unique_name_in_owner = true
+layout_mode = 2
+text = "[-]"
+flat = true
+
+[node name="AgeValue" type="Label" parent="Center/VBox/AgeRow" unique_id=1129494751]
+unique_name_in_owner = true
+layout_mode = 2
+text = "18"
+
+[node name="Plus" type="Button" parent="Center/VBox/AgeRow" unique_id=1634450053]
+unique_name_in_owner = true
+layout_mode = 2
+text = "[+]"
+flat = true
+
+[node name="TalentRow" type="HBoxContainer" parent="Center/VBox" unique_id=174743277]
+layout_mode = 2
+
+[node name="TalentLabel" type="Label" parent="Center/VBox/TalentRow" unique_id=1426407028]
+layout_mode = 2
+text = "特质："
+
+[node name="TalentA" type="CheckBox" parent="Center/VBox/TalentRow" unique_id=330300397]
+unique_name_in_owner = true
+layout_mode = 2
+text = "幼稚"
+flat = true
+
+[node name="TalentB" type="CheckBox" parent="Center/VBox/TalentRow" unique_id=168973966]
+unique_name_in_owner = true
+layout_mode = 2
+text = "早熟"
+flat = true
+
+[node name="StartButton" type="Button" parent="Center/VBox" unique_id=718356304]
+unique_name_in_owner = true
+layout_mode = 2
+text = "[开始游戏]"
+flat = true

@@ -1,0 +1,6 @@
+# CSV 角色定义 v1：子目录样例（同组件多行合并）
+id,guard
+名字,门卫
+称呼,大叔
+组件,EnergyComponent,value=55
+组件,EnergyComponent,max_value=90

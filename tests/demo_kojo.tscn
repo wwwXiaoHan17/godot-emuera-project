@@ -1,0 +1,6 @@
+[gd_scene format=3 uid="uid://dql7g887ihmhg"]
+
+[ext_resource type="Script" uid="uid://7key7i7eoj4f" path="res://tests/demo_kojo.gd" id="1_demo"]
+
+[node name="DemoKojo" type="Node" unique_id=106058937]
+script = ExtResource("1_demo")

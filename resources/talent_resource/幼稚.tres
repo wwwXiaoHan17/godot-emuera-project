@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="TalentData" format=3 uid="uid://btj8r8o5wtjih"]
+
+[ext_resource type="Script" uid="uid://cc447631w1fbp" path="res://scripts/base_resource/talent_data.gd" id="1_46qbu"]
+
+[resource]
+script = ExtResource("1_46qbu")
+talent_name = &"childish"
+display_name = "幼稚"
+conflicts_with = Array[StringName]([&"precocious"])
+metadata/_custom_type_script = "uid://cc447631w1fbp"

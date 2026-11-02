@@ -1,0 +1,34 @@
+[gd_resource type="Resource" script_class="Character" format=3 uid="uid://68sawbeajo03"]
+
+[ext_resource type="Script" uid="uid://bnqqeoa04ywiv" path="res://engine/character/character_component.gd" id="1_wxs8l"]
+[ext_resource type="Script" uid="uid://wusphtuxvl6w" path="res://content/characters/components/life_component.gd" id="2_5cc8h"]
+[ext_resource type="Script" uid="uid://qjocnvklwe6j" path="res://engine/character/relation_entry.gd" id="3_tru74"]
+[ext_resource type="Script" uid="uid://da6epjx54d3eh" path="res://engine/character/relation_component.gd" id="4_5cc8h"]
+[ext_resource type="Script" uid="uid://vugf6mjds2ur" path="res://engine/character/character.gd" id="4_aydrv"]
+
+[sub_resource type="Resource" id="Resource_spk8e"]
+script = ExtResource("2_5cc8h")
+display_name = "生命"
+
+[sub_resource type="Resource" id="Resource_tru74"]
+script = ExtResource("3_tru74")
+target = &"player"
+relation = 10
+
+[sub_resource type="Resource" id="Resource_aydrv"]
+script = ExtResource("3_tru74")
+target = &"daughter"
+relation = 30
+
+[sub_resource type="Resource" id="Resource_w5gf8"]
+script = ExtResource("4_5cc8h")
+relations = Array[ExtResource("3_tru74")]([SubResource("Resource_tru74"), SubResource("Resource_aydrv")])
+display_name = "关系"
+
+[resource]
+script = ExtResource("4_aydrv")
+id = &"maid"
+display_name = "小梅"
+callname = "小梅"
+components = Array[ExtResource("1_wxs8l")]([SubResource("Resource_spk8e"), SubResource("Resource_w5gf8")])
+is_prototype = true
