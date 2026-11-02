@@ -52,13 +52,13 @@ MS Gothic **只作 advance 语义基准**（度量参考），**不复制任何�
 素材（都不入库）：
 
 1. `EraMono SC.ttf`：era-electron 仓库 `src/assets/fonts/EraMono SC.ttf`
-2. `MS Gothic.ttf`：advance 基准，项目里现有 `assets/fonts/MS Gothic.ttf`
+2. `MS Gothic.ttf`：advance 基准，Windows 自带，**本地自备（不入库）**
 
 ```bash
 pip install fonttools
 python tools/font/rebuild_font.py \
   --src "路径/EraMono SC.ttf" \
-  --ms  "assets/fonts/MS Gothic.ttf" \
+  --ms  "路径/MS Gothic.ttf" \
   --out "assets/fonts/GEMono-SC.ttf" \
   --report "tools/font/build_report.json"
 ```

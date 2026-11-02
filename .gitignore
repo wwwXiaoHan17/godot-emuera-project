@@ -1,4 +1,4 @@
-﻿# Godot 4+ specific ignores
+# Godot 4+ specific ignores
 .godot/
 /android/
 
@@ -22,7 +22,11 @@ desktop.ini
 *.log
 *.tmp
 
-
-# the files which created by AI
-/doc/
+# AI 产物 / 工作快照（不入库，本地保留）
+/docs/
 /experiment/
+/SKILL_INSTALL_REPORT.md
+
+# 不随仓库分发的专有字体（MS Gothic 已被 GEMono SC 取代）
+/assets/fonts/MS Gothic.ttf
+/assets/fonts/MS Gothic.ttf.import
