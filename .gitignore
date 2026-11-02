@@ -21,3 +21,8 @@ desktop.ini
 # Logs and temporary files
 *.log
 *.tmp
+
+
+# the files which created by AI
+/doc/
+/experiment/
