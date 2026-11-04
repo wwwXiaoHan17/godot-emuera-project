@@ -2,7 +2,9 @@
 
 [ext_resource type="Script" uid="uid://bwruhx1lp8gto" path="res://engine/rows/button_row.gd" id="1_row"]
 
-[node name="ButtonRow" type="Button" unique_id=1284152992]
+[node name="ButtonRow" type="Button" unique_id=793049087]
+offset_right = 8.0
+offset_bottom = 8.0
 focus_mode = 0
 flat = true
 script = ExtResource("1_row")

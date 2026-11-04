@@ -10,7 +10,7 @@ config_version=5
 
 [application]
 
-config/name="MyTest"
+config/name="GodotEmueraProject"
 run/main_scene="res://main.tscn"
 config/features=PackedStringArray("4.8", "Forward Plus")
 config/icon="res://icon.svg"
@@ -30,7 +30,8 @@ window/vsync/vsync_mode=0
 
 folder_colors={
 "res://content/": "red",
-"res://engine/": "red"
+"res://engine/": "red",
+"res://scenes/": "green"
 }
 
 [gui]
