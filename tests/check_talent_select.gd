@@ -70,10 +70,10 @@ func _ready() -> void:
 		if Era.row_count() != 7:
 			failures.append("确认后应再打印 2 行，实际 %d" % Era.row_count())
 
-		# 穿过 type_a_new_game 剧情（等键 + 双按钮）→ 第 1 天（13 行：多了“对玩家好感”一行 + 5 个按钮）
+		# 穿过 type_a_new_game 剧情（等键 + 双按钮）→ 第 1 天（面板块：3 行）
 		await _walk_until_day_start()
-		if Era.row_count() != 13:
-			failures.append("进入第 1 天应有 13 行，实际 %d" % Era.row_count())
+		if Era.row_count() != 3:
+			failures.append("进入第 1 天应有 3 行（面板块版），实际 %d" % Era.row_count())
 
 	if failures.is_empty():
 		print("CHECK OK")
@@ -85,18 +85,26 @@ func _ready() -> void:
 		get_tree().quit(1)
 
 
-## 穿过 type_a_new_game 剧情（等键 + 双按钮 input），直到第 1 天的 13 行出现。
-## 不能只看 row_count() >= 13：剧情选“亲生女儿”后行数也会经过 13（还在剧情中段）。
-## 必须等行数先冲过 13（剧情尾部）、再被第 1 天清屏回到 13，才算真正到站。
+## 穿过 type_a_new_game 剧情（等键 + 双按钮 input），直到第 1 天出现。
+## 第 1 天用面板块（3 行），靠“有没有带按钮 5 的面板块”判断到站，不能只看行数。
 func _walk_until_day_start() -> void:
 	var guard := 0
-	var peak := 0
-	while guard < 120:
-		var count := Era.row_count()
-		peak = maxi(peak, count)
-		if count == 13 and peak > 13:
+	while guard < 240:
+		if _is_day_start_visible():
 			return
 		Era._choose(0)      # 过 type_a_new_game 的双按钮 input（非 input 期会被引擎忽略，无害）
 		Era._resolve_key()  # 过 print_wait 的等键
 		await get_tree().process_frame
 		guard += 1
+
+
+func _is_day_start_visible() -> bool:
+	if Era.row_count() != 3:
+		return false
+	var rows := get_node_or_null("/root/Era/EraLayer/EraScreen/Margin/Scroll/Rows")
+	if rows == null:
+		return false
+	for child in rows.get_children():
+		if child.has_method("button_ids"):
+			return child.button_ids().has(5)
+	return false

@@ -1,11 +1,14 @@
 extends Node
-## CheckDayStart, 校验完整流程：挂载页 → 天赋格子 → 第 1 天（角色组件版）
+## CheckDayStart, 校验完整流程：挂载页 → 天赋格子 → 第 1 天（EraFlet 面板版）→ 看地图 → 角色面板
 ##
 ## 流程：标题 → 开始游戏 → 角色创建页（名字/年龄）→ 天赋选择（多列格子）→
-## type_a 开场剧情 → 第 1 天（数据来自女儿角色的体力/精力/好感/天赋组件）→ 数值变化 → 重画面板。
+## type_a 开场剧情 → 第 1 天（状态/菜单用面板块；数据来自女儿组件）→
+## 看地图（eraTW 地图，点地点 06）→ 回到第 1 天 → 角色面板 → 数值变化 → 重画。
 ## 成功打印 CHECK OK 并退出码 0；失败打印 CHECK FAIL 并退出码 1。
 
 const TITLE := preload("res://content/events/type_a_title.gd")
+const DAY_START_ROWS := 3      # 分割线 / 面板块 / 分割线
+const ACTION_ROWS := 5         # 第 1 天 + 动作结果 2 行
 
 
 func _ready() -> void:
@@ -53,10 +56,10 @@ func _ready() -> void:
 	if Era.row_count() != 5:
 		failures.append("天赋屏应有 5 行，实际 %d" % Era.row_count())
 
-	var rows := get_node_or_null("/root/Era/EraLayer/EraScreen/Margin/Scroll/Rows")
 	var grid: Variant = null
-	if rows != null and rows.get_child_count() >= 1:
-		grid = rows.get_child(rows.get_child_count() - 1)
+	var rows_node := _rows()
+	if rows_node != null and rows_node.get_child_count() >= 1:
+		grid = rows_node.get_child(rows_node.get_child_count() - 1)
 	if grid == null or not (grid is GridContainer):
 		failures.append("天赋屏最后一行不是格子块")
 	else:
@@ -75,10 +78,12 @@ func _ready() -> void:
 	if Era.row_count() != 7:
 		failures.append("确认后应再打印 2 行，实际 %d" % Era.row_count())
 
-	# 穿过 type_a_new_game 剧情（等键 + 双按钮）→ 第 1 天（13 行：名字/体力/好感/天赋/说明/5 个按钮）
+	# 穿过 type_a_new_game 剧情 → 第 1 天（面板版：3 行）
 	await _walk_until_day_start()
-	if Era.row_count() != 13:
-		failures.append("第 1 天应有 13 行（5 个按钮），实际 %d" % Era.row_count())
+	if not _is_day_start_visible():
+		failures.append("没有进入第 1 天")
+	if Era.row_count() != DAY_START_ROWS:
+		failures.append("第 1 天应有 %d 行，实际 %d" % [DAY_START_ROWS, Era.row_count()])
 
 	var stamina := daughter.get_component(StaminaComponent) as StaminaComponent if daughter != null else null
 	var energy := daughter.get_component(EnergyComponent) as EnergyComponent if daughter != null else null
@@ -86,6 +91,49 @@ func _ready() -> void:
 		failures.append("女儿缺少体力/精力组件")
 	elif stamina.value != 100 or energy.value != 100:
 		failures.append("进入第 1 天时体力/精力应为 100/100，实际 %d/%d" % [stamina.value, energy.value])
+
+	# 面板块：高度 204（8 行），状态面板里有“第 1 天”，下面的分割线对齐到 +234px
+	var block: Variant = _find_panel_block()
+	if block == null:
+		failures.append("第 1 天没有面板块")
+	else:
+		if absf(block.get_combined_minimum_size().y - 204.0) > 0.5:
+			failures.append("第 1 天面板块高度应为 204，实际 %.2f" % block.get_combined_minimum_size().y)
+		var texts: Array[String] = []
+		_collect_texts(block, texts)
+		if not texts.has("第 1 天"):
+			failures.append("状态面板里没有“第 1 天”")
+		if not texts.has("[0] 出去走走"):
+			failures.append("菜单面板里没有“[0] 出去走走”")
+		if rows_node != null and rows_node.get_child_count() == DAY_START_ROWS:
+			var first_y: float = (rows_node.get_child(0) as Control).position.y
+			var last_y: float = (rows_node.get_child(2) as Control).position.y
+			if absf(last_y - first_y - 9.0 * 26.0) > 0.5:
+				failures.append("面板下面的分割线应对齐到 +234px，实际 +%.2f" % (last_y - first_y))
+
+	# 看地图：第 1 天 → 2 行（标题 + 地图）→ 点地点 06 → 3 行（结果）→ 按键回第 1 天
+	Era._choose(5)
+	if Era.row_count() != 2:
+		failures.append("地图屏应有 2 行（标题 + 地图），实际 %d" % Era.row_count())
+	var map_row: Variant = _find_panel_block()
+	if map_row == null or not map_row.has_method("get_button"):
+		failures.append("地图屏最后一行不是地图块")
+	elif not map_row.button_ids().has(6):
+		failures.append("地图块里没有地点 06 的按钮")
+	else:
+		(map_row.get_button(6) as Button).pressed.emit()
+		if Era.row_count() != 3:
+			failures.append("点地点后应多 1 行结果，实际 %d" % Era.row_count())
+		var rows_after := _rows()
+		if rows_after != null and rows_after.get_child_count() >= 3:
+			var result_text: String = _row_text(rows_after.get_child(2))
+			if result_text != "你点了地点 06。":
+				failures.append("地点结果文字不对：%s" % result_text)
+	Era._resolve_key()
+	if not _is_day_start_visible():
+		failures.append("地图按键后应回到第 1 天")
+	if Era.row_count() != DAY_START_ROWS:
+		failures.append("回到第 1 天应有 %d 行，实际 %d" % [DAY_START_ROWS, Era.row_count()])
 
 	# 查看角色面板：第 1 天 → 面板 11 行
 	Era._choose(2)
@@ -105,26 +153,26 @@ func _ready() -> void:
 
 	# 返回第 1 天
 	Era._choose(4)
-	if Era.row_count() != 13:
-		failures.append("从面板返回第 1 天应有 13 行，实际 %d" % Era.row_count())
+	if Era.row_count() != DAY_START_ROWS:
+		failures.append("从面板返回第 1 天应有 %d 行，实际 %d" % [DAY_START_ROWS, Era.row_count()])
 
 	# 出去走走 → 组件数值 -10/-5 → 打印结果 + “现在” → 按键后重画
 	Era._choose(0)
-	if Era.row_count() != 15:
+	if Era.row_count() != ACTION_ROWS:
 		failures.append("选择后应追加 2 行（结果 + 现在），实际 %d" % Era.row_count())
 	if stamina != null and energy != null and (stamina.value != 90 or energy.value != 95):
 		failures.append("体力/精力应为 90/95，实际 %d/%d" % [stamina.value, energy.value])
 	Era._resolve_key()
-	if Era.row_count() != 13:
-		failures.append("重画第 1 天后应回到 13 行，实际 %d" % Era.row_count())
+	if Era.row_count() != DAY_START_ROWS:
+		failures.append("重画第 1 天后应回到 %d 行，实际 %d" % [DAY_START_ROWS, Era.row_count()])
 
 	# 在家休息 → 再验证一次加减 + 重画
 	Era._choose(1)
 	if stamina != null and energy != null and (stamina.value != 95 or energy.value != 100):
 		failures.append("休息后体力/精力应为 95/100（精力夹到上限），实际 %d/%d" % [stamina.value, energy.value])
 	Era._resolve_key()
-	if Era.row_count() != 13:
-		failures.append("再次重画后应回到 13 行，实际 %d" % Era.row_count())
+	if Era.row_count() != DAY_START_ROWS:
+		failures.append("再次重画后应回到 %d 行，实际 %d" % [DAY_START_ROWS, Era.row_count()])
 
 	if failures.is_empty():
 		print("CHECK OK")
@@ -136,6 +184,51 @@ func _ready() -> void:
 		get_tree().quit(1)
 
 
+func _rows() -> Node:
+	return get_node_or_null("/root/Era/EraLayer/EraScreen/Margin/Scroll/Rows")
+
+
+## 屏幕里带 button_ids() 的行（面板块 / 地图块），没有就返回 null。
+func _find_panel_block() -> Variant:
+	var rows_node := _rows()
+	if rows_node == null:
+		return null
+	for child in rows_node.get_children():
+		if child.has_method("button_ids"):
+			return child
+	return null
+
+
+## 第 1 天是否已经显示：3 行，且其中有一块带按钮 0 和 5 的面板块。
+func _is_day_start_visible() -> bool:
+	if Era.row_count() != DAY_START_ROWS:
+		return false
+	var block: Variant = _find_panel_block()
+	return block != null and block.button_ids().has(0) and block.button_ids().has(5)
+
+
+func _row_text(row: Node) -> String:
+	for child in row.get_children():
+		if child is Label:
+			return (child as Label).text
+		if child is RichTextLabel:
+			return (child as RichTextLabel).get_parsed_text()
+	if row is Label:
+		return (row as Label).text
+	return ""
+
+
+func _collect_texts(node: Node, out: Array[String]) -> void:
+	if node is Label:
+		out.append((node as Label).text)
+	elif node is RichTextLabel:
+		out.append((node as RichTextLabel).get_parsed_text())
+	elif node is Button:
+		out.append((node as Button).text)
+	for child in node.get_children():
+		_collect_texts(child, out)
+
+
 func _wait_rows(target: int, max_frames: int) -> void:
 	var guard := 0
 	while Era.row_count() < target and guard < max_frames:
@@ -143,16 +236,12 @@ func _wait_rows(target: int, max_frames: int) -> void:
 		guard += 1
 
 
-## 穿过 type_a_new_game 剧情（print_wait 的等键 + 双按钮 input），直到第 1 天的 13 行出现。
-## 不能只看 row_count() >= 13：剧情选“亲生女儿”后行数也会经过 13（还在剧情中段）。
-## 必须等行数先冲过 13（剧情尾部）、再被第 1 天清屏回到 13，才算真正到站。
+## 穿过 type_a_new_game 剧情（print_wait 的等键 + 双按钮 input），直到第 1 天的 3 行出现。
+## 不能只看 row_count()：剧情中也可能正好是 3 行，所以用“有没有带按钮 0/5 的面板块”判断到站。
 func _walk_until_day_start() -> void:
 	var guard := 0
-	var peak := 0
-	while guard < 120:
-		var count := Era.row_count()
-		peak = maxi(peak, count)
-		if count == 13 and peak > 13:
+	while guard < 240:
+		if _is_day_start_visible():
 			return
 		Era._choose(0)      # 过 type_a_new_game 的双按钮 input（非 input 期会被引擎忽略，无害）
 		Era._resolve_key()  # 过 print_wait 的等键

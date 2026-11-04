@@ -47,6 +47,9 @@ def build_charset() -> str:
                  (0xFE30, 0xFE4F), (0xFF00, 0xFFEF)]:
         chars.update(chr(c) for c in range(a, b + 1))
     chars.update("♥★☆♪♫→←↑↓■□▲△▼▽◆◇○●◎✓✗")
+    # 补充字符（GB2312 与上面的区段都不含，eraTW 彩色地图/普通文案会用到）：
+    # ∬ 卍 是地图里的符号；· 是间隔号。EraMono 有字形、MS Gothic 有度量基准。
+    chars.update("∬卍·")
     return "".join(sorted(chars))
 
 

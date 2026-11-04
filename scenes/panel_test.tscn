@@ -1,0 +1,259 @@
+[gd_scene format=3 uid="uid://jinu68fp8gl3"]
+
+[node name="PanelTest" type="Control" unique_id=1754110498]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ScrollContainer" type="ScrollContainer" parent="." unique_id=247714264]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="ScrollContainer" unique_id=81219584]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="RichTextLabel" type="RichTextLabel" parent="ScrollContainer/VBoxContainer" unique_id=820461272]
+layout_mode = 2
+bbcode_enabled = true
+text = "生命:[color=red]■■■■■[/color]■■■■"
+fit_content = true
+
+[node name="RichTextLabel2" type="RichTextLabel" parent="ScrollContainer/VBoxContainer" unique_id=470048112]
+layout_mode = 2
+bbcode_enabled = true
+text = "精力:[color=blue]■■[/color]■■■■■■■"
+fit_content = true
+
+[node name="RichTextLabel3" type="RichTextLabel" parent="ScrollContainer/VBoxContainer" unique_id=1652765925]
+layout_mode = 2
+bbcode_enabled = true
+text = "生命:[color=red]■■■■■[/color]■■■■"
+fit_content = true
+
+[node name="RichTextLabel4" type="RichTextLabel" parent="ScrollContainer/VBoxContainer" unique_id=956910811]
+layout_mode = 2
+bbcode_enabled = true
+text = "生命:[color=red]■■■■■[/color]■■■■"
+fit_content = true
+
+[node name="EraFlet" type="Control" parent="ScrollContainer/VBoxContainer" unique_id=643689144]
+custom_minimum_size = Vector2(0, 451)
+layout_mode = 2
+
+[node name="PanelContainer" type="PanelContainer" parent="ScrollContainer/VBoxContainer/EraFlet" unique_id=1440463452]
+layout_mode = 0
+offset_left = 312.0
+offset_top = 4.0
+offset_right = 586.7216
+offset_bottom = 117.46274
+
+[node name="VBoxContainer" type="VBoxContainer" parent="ScrollContainer/VBoxContainer/EraFlet/PanelContainer" unique_id=2015069634]
+layout_mode = 2
+
+[node name="Button" type="Button" parent="ScrollContainer/VBoxContainer/EraFlet/PanelContainer/VBoxContainer" unique_id=412940246]
+layout_mode = 2
+text = "[1] 12312312"
+alignment = 0
+
+[node name="Button2" type="Button" parent="ScrollContainer/VBoxContainer/EraFlet/PanelContainer/VBoxContainer" unique_id=339831790]
+layout_mode = 2
+text = "[1] 12312312"
+alignment = 0
+
+[node name="Button3" type="Button" parent="ScrollContainer/VBoxContainer/EraFlet/PanelContainer/VBoxContainer" unique_id=420517310]
+layout_mode = 2
+text = "[1] 12312312"
+alignment = 0
+
+[node name="Button4" type="Button" parent="ScrollContainer/VBoxContainer/EraFlet/PanelContainer/VBoxContainer" unique_id=1501313560]
+layout_mode = 2
+text = "[1] 12312312"
+alignment = 0
+
+[node name="Button5" type="Button" parent="ScrollContainer/VBoxContainer/EraFlet/PanelContainer/VBoxContainer" unique_id=2055726338]
+layout_mode = 2
+text = "[1] 12312312"
+alignment = 0
+
+[node name="Button6" type="Button" parent="ScrollContainer/VBoxContainer/EraFlet/PanelContainer/VBoxContainer" unique_id=1734960420]
+layout_mode = 2
+text = "[1] 12312312"
+alignment = 0
+
+[node name="PanelContainer2" type="PanelContainer" parent="ScrollContainer/VBoxContainer/EraFlet" unique_id=1265625197]
+layout_mode = 0
+offset_left = 312.0
+offset_top = 172.0
+offset_right = 586.7216
+offset_bottom = 459.09344
+
+[node name="VBoxContainer" type="VBoxContainer" parent="ScrollContainer/VBoxContainer/EraFlet/PanelContainer2" unique_id=1988628521]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="ScrollContainer/VBoxContainer/EraFlet/PanelContainer2/VBoxContainer" unique_id=884088533]
+layout_mode = 2
+text = "此处为测试文本"
+
+[node name="Label2" type="Label" parent="ScrollContainer/VBoxContainer/EraFlet/PanelContainer2/VBoxContainer" unique_id=182902010]
+layout_mode = 2
+text = "到正式游戏时需要替换成正式文本"
+
+[node name="PanelContainer3" type="PanelContainer" parent="ScrollContainer/VBoxContainer/EraFlet" unique_id=1542153834]
+layout_mode = 0
+offset_left = 614.9611
+offset_top = 3.7769775
+offset_right = 1128.17
+offset_bottom = 340.03665
+
+[node name="VBoxContainer" type="VBoxContainer" parent="ScrollContainer/VBoxContainer/EraFlet/PanelContainer3" unique_id=279156611]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="ScrollContainer/VBoxContainer/EraFlet/PanelContainer3/VBoxContainer" unique_id=221499030]
+layout_mode = 2
+text = "■■■■■■■■■
+■　　　1   　　■
+■　　　　　　　■
+■２　　　　　３■
+■５　　　５　　■
+■■■■■■■■■"
+
+[node name="Label2" type="Label" parent="ScrollContainer/VBoxContainer/EraFlet/PanelContainer3/VBoxContainer" unique_id=36272396]
+layout_mode = 2
+text = "■■■■■■■■■
+■　　　1   　　■
+■　　　　　　　■
+■２　　　　　３■
+■５　　　５　　■
+■■■■■■■■■"
+
+[node name="VBoxContainer2" type="VBoxContainer" parent="ScrollContainer/VBoxContainer/EraFlet/PanelContainer3" unique_id=1499159884]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="ScrollContainer/VBoxContainer" unique_id=1185971518]
+layout_mode = 2
+text = "123123123"
+
+[node name="Label2" type="Label" parent="ScrollContainer/VBoxContainer" unique_id=294714486]
+layout_mode = 2
+text = "123123123"
+
+[node name="Label3" type="Label" parent="ScrollContainer/VBoxContainer" unique_id=1552011053]
+layout_mode = 2
+text = "123123123"
+
+[node name="Label4" type="Label" parent="ScrollContainer/VBoxContainer" unique_id=1043126204]
+layout_mode = 2
+text = "123123123"
+
+[node name="Label5" type="Label" parent="ScrollContainer/VBoxContainer" unique_id=572267387]
+layout_mode = 2
+text = "123123123"
+
+[node name="Label6" type="Label" parent="ScrollContainer/VBoxContainer" unique_id=722075045]
+layout_mode = 2
+text = "123123123"
+
+[node name="Label7" type="Label" parent="ScrollContainer/VBoxContainer" unique_id=1126283762]
+layout_mode = 2
+text = "123123123"
+
+[node name="Label8" type="Label" parent="ScrollContainer/VBoxContainer" unique_id=2042174073]
+layout_mode = 2
+text = "123123123"
+
+[node name="Label9" type="Label" parent="ScrollContainer/VBoxContainer" unique_id=137391393]
+layout_mode = 2
+text = "123123123"
+
+[node name="Label10" type="Label" parent="ScrollContainer/VBoxContainer" unique_id=385716126]
+layout_mode = 2
+text = "123123123"
+
+[node name="Label11" type="Label" parent="ScrollContainer/VBoxContainer" unique_id=132600208]
+layout_mode = 2
+text = "123123123"
+
+[node name="Label12" type="Label" parent="ScrollContainer/VBoxContainer" unique_id=59176371]
+layout_mode = 2
+text = "123123123"
+
+[node name="Label13" type="Label" parent="ScrollContainer/VBoxContainer" unique_id=1436527486]
+layout_mode = 2
+text = "123123123"
+
+[node name="Label14" type="Label" parent="ScrollContainer/VBoxContainer" unique_id=220496842]
+layout_mode = 2
+text = "123123123"
+
+[node name="Label15" type="Label" parent="ScrollContainer/VBoxContainer" unique_id=1490969355]
+layout_mode = 2
+text = "123123123"
+
+[node name="Label16" type="Label" parent="ScrollContainer/VBoxContainer" unique_id=521327272]
+layout_mode = 2
+text = "123123123"
+
+[node name="Label17" type="Label" parent="ScrollContainer/VBoxContainer" unique_id=1679358143]
+layout_mode = 2
+text = "123123123"
+
+[node name="Label18" type="Label" parent="ScrollContainer/VBoxContainer" unique_id=1596571278]
+layout_mode = 2
+text = "123123123"
+
+[node name="Label19" type="Label" parent="ScrollContainer/VBoxContainer" unique_id=1264030204]
+layout_mode = 2
+text = "123123123"
+
+[node name="Label20" type="Label" parent="ScrollContainer/VBoxContainer" unique_id=347311893]
+layout_mode = 2
+text = "123123123"
+
+[node name="Label21" type="Label" parent="ScrollContainer/VBoxContainer" unique_id=181954361]
+layout_mode = 2
+text = "123123123"
+
+[node name="Label22" type="Label" parent="ScrollContainer/VBoxContainer" unique_id=508415446]
+layout_mode = 2
+text = "123123123"
+
+[node name="Label23" type="Label" parent="ScrollContainer/VBoxContainer" unique_id=337038863]
+layout_mode = 2
+text = "123123123"
+
+[node name="Label24" type="Label" parent="ScrollContainer/VBoxContainer" unique_id=2090263842]
+layout_mode = 2
+text = "123123123"
+
+[node name="Label25" type="Label" parent="ScrollContainer/VBoxContainer" unique_id=1884572005]
+layout_mode = 2
+text = "123123123"
+
+[node name="Label26" type="Label" parent="ScrollContainer/VBoxContainer" unique_id=52550827]
+layout_mode = 2
+text = "123123123"
+
+[node name="Label27" type="Label" parent="ScrollContainer/VBoxContainer" unique_id=453079079]
+layout_mode = 2
+text = "123123123"
+
+[node name="Label28" type="Label" parent="ScrollContainer/VBoxContainer" unique_id=34485225]
+layout_mode = 2
+text = "123123123"
+
+[node name="Label29" type="Label" parent="ScrollContainer/VBoxContainer" unique_id=186657727]
+layout_mode = 2
+text = "123123123"
+
+[node name="Label30" type="Label" parent="ScrollContainer/VBoxContainer" unique_id=335058476]
+layout_mode = 2
+text = "123123123"

@@ -30,8 +30,8 @@ MS Gothic **只作 advance 语义基准**（度量参考），**不复制任何�
 | layout 表 | 已丢弃 GPOS/GSUB/BASE/GDEF → **无 kerning**，advance 严格等宽 |
 | .notdef | 全角 advance（1000），缺字占满一格不发散 |
 | allow_system_fallback | **false**（设置在内嵌主题 FontFile 上，不是 .import 上） |
-| 字符集 | ASCII + GB2312 全集 + 标点/假名/符号区 + 常用游戏符号，共 **8730** 字 |
-| 实有字形 | 8424；缺 310 个罕符号（见 `charset_missing.txt`，关闭回退后显示 □，行高不变） |
+| 字符集 | ASCII + GB2312 全集 + 标点/假名/符号区 + 常用游戏符号，共 **8733** 字 |
+| 实有字形 | 8427；缺 310 个罕符号（见 `charset_missing.txt`，关闭回退后显示 □，行高不变） |
 | 文件体积 | 2.04 MB（内嵌后主题 2.85 MB） |
 
 > 行高从 17px 变成 22px 是本次的**有意识决策**：不做固定行高，保留字体原生高度。
@@ -42,9 +42,11 @@ MS Gothic **只作 advance 语义基准**（度量参考），**不复制任何�
 
 逐字符对比 MS Gothic 的 `hmtx / upem` 比例后修正：
 
-- **155** 个字符由半角改全角；
+- **156** 个字符由半角改全角；
 - **145** 个字符由全角改半角；
-- 合计 300 处（主要是箭头 `↗⇧`、希腊/西里尔 `χΡд`、杂项 `▣▭◉№` 等冷门符号）；
+- 合计 301 处（主要是箭头 `↗⇧`、希腊/西里尔 `χΡд`、杂项 `▣▭◉№` 等冷门符号）；
+- 2026-11-05 追加：`∬`（U+222C）、`卍`（U+534D）改为全角，`·`（U+00B7）保持半角
+  （EraMono 有字形、MS Gothic 有度量；eraTW 彩色地图会用到前两个）；
 - 框线 `┏━┃`、块元素 `█░▓`、常用箭头 `→←↑↓`、`①★☆♪` 本来就一致，未改动。
 
 ## 重建
@@ -74,9 +76,9 @@ python tools/font/rebuild_font.py \
 
 ```bash
 python tools/font/embed_theme_font.py \
-  --theme assets/themes/normal_theme.tres \
+  --theme assets/themes/era_theme.tres \
   --font  assets/fonts/GEMono-SC.ttf \
-  --out   assets/themes/normal_theme.tres \
+  --out   assets/themes/era_theme.tres \
   --font-name "GE Mono SC"
 ```
 

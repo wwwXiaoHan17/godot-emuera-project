@@ -123,10 +123,13 @@ func _ready() -> void:
 	Era.clear()
 	Era.start(DAY_START_SCRIPT)
 	var walked := 0
-	while Era.row_count() < 13 and walked < 120:
+	while walked < 120 and not _day_start_visible():
 		await get_tree().process_frame
 		walked += 1
-	var day_texts := _row_texts()
+	var day_texts: Array[String] = []
+	var day_block: Variant = _day_start_block()
+	if day_block != null:
+		_collect_texts(day_block, day_texts)
 	if not day_texts.has("第 3 天"):
 		_failures.append("day_start 应按 Era.state.day 显示“第 3 天”，实际 %s" % str(day_texts))
 
@@ -178,6 +181,35 @@ func _finish() -> void:
 		for failure in _failures:
 			print("  - ", failure)
 		get_tree().quit(1)
+
+
+## 屏幕里带 button_ids() 的行（面板块），没有就返回 null。
+func _day_start_block() -> Variant:
+	var rows := get_node_or_null("/root/Era/EraLayer/EraScreen/Margin/Scroll/Rows")
+	if rows == null:
+		return null
+	for child in rows.get_children():
+		if child.has_method("button_ids"):
+			return child
+	return null
+
+
+## 第 1 天是否已显示（面板块里有“看地图”的编号 5）。
+func _day_start_visible() -> bool:
+	var block: Variant = _day_start_block()
+	return block != null and block.button_ids().has(5)
+
+
+## 把某棵子树里的文字（Label / RichTextLabel / Button）收成字符串。
+func _collect_texts(node: Node, out: Array[String]) -> void:
+	if node is Label:
+		out.append((node as Label).text)
+	elif node is RichTextLabel:
+		out.append((node as RichTextLabel).get_parsed_text())
+	elif node is Button:
+		out.append((node as Button).text)
+	for child in node.get_children():
+		_collect_texts(child, out)
 
 
 ## 把文字行（Label / RichTextLabel）收成字符串；按钮/格子行跳过。

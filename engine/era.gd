@@ -30,6 +30,8 @@ const TEXT_ROW_SCENE := preload("res://engine/rows/text_row.tscn")
 const BUTTON_ROW_SCENE := preload("res://engine/rows/button_row.tscn")
 const RULE_ROW_SCENE := preload("res://engine/rows/rule_row.tscn")
 const GRID_ROW_SCENE := preload("res://engine/rows/grid_row.tscn")
+const ASCII_MAP_ROW_SCENE := preload("res://engine/rows/ascii_map_row.tscn")
+const PANEL_BLOCK_SCENE := preload("res://engine/rows/panel_block.tscn")
 const GAME_STATE_SCRIPT := preload("res://engine/game_state.gd")
 
 ## 壳所在的画布层。
@@ -76,6 +78,12 @@ var _grid_columns := 3
 var _grid_items: Array = []
 var _pending_grids: Array = []
 var _active_grids: Array = []
+var _panel_mode := false
+var _panels: Array = []
+var _current_panel: Dictionary = {}
+var _hbox_mode := false
+var _hbox_items: Array = []
+var _hbox_separation := 0
 
 
 func _ready() -> void:
@@ -129,6 +137,10 @@ func print_button(
 	id: int,
 	align: HorizontalAlignment = HORIZONTAL_ALIGNMENT_LEFT
 ) -> void:
+	# 面板收集模式下，先放进当前面板（或横排段），end_panels() 时一次画出
+	if _panel_mode:
+		_panel_add_item({"kind": "button", "id": id, "text": text, "align": align})
+		return
 	# 格子收集模式下，先放进当前块，end_grid() 时一次画出（动作项）
 	if _grid_mode:
 		_grid_items.append({"id": id, "text": text, "kind": "action"})
@@ -218,9 +230,33 @@ func end_grid() -> Variant:
 ## [br][br]
 ## [param char] 用来重复的符号；重复次数按当前文字区宽度算。
 func print_rule(char: String = "╍") -> void:
+	if _panel_mode:
+		push_warning("Era：print_rule 暂时不支持写在面板里")
+		return
 	var row: Variant = RULE_ROW_SCENE.instantiate()
 	_screen.append_row(row)
 	row.setup(char, _screen.text_char_count(char))
+
+
+## 追加一块 eraTW 风格的彩色字符画（一行 = 一个 HBox，数字 = 真按钮）。
+## [br][br]
+## [param rows] 每行一个字符串；[param color_rows] 每行一个逗号分隔的颜色标记
+## （[code]""[/code] 沿用上一格、[code]"def"[/code] / [code]"0"[/code] 默认色、
+## [code]"0xRRGGBB"[/code] 具体颜色，其余名字按近似色处理）。
+## 行内的半角数字会变成按钮，点它们会让 [method input] 返回对应编号。
+## [br][br]
+## 返回地图行句柄（可接 [code]picked[/code] 信号、调 [code]make_inert[/code]）。
+func print_map(rows: Array, color_rows: Array, default_color: Color = Color(0.78, 0.78, 0.78)) -> Variant:
+	if _panel_mode:
+		_panel_add_item({"kind": "map", "rows": rows, "colors": color_rows, "color": default_color})
+		return null
+	var row: Variant = ASCII_MAP_ROW_SCENE.instantiate()
+	_screen.append_row(row)
+	row.setup(rows, color_rows, default_color)
+	row.picked.connect(_on_button_picked)
+	for id in row.button_ids():
+		_pending_buttons.append({"id": int(id), "row": row})
+	return row
 
 
 ## 追加 [param count] 个空行
@@ -231,6 +267,122 @@ func print_gap(count: int = 1) -> void:
 		_print_text(" ", Style.NORMAL, HORIZONTAL_ALIGNMENT_LEFT)
 
 
+# -------------------- EraFlet 面板块 --------------------
+
+## 开始收集一块 EraFlet 面板；之后用 [method begin_panel] / [method end_panel] 逐个描述面板，
+## [method end_panels] 一次挂上。
+## [br][br]
+## 面板里的坐标、大小都由调用方自己写；整块高度 = 所有面板里最长的那块行数 × 26px。
+func begin_panels() -> void:
+	if _panel_mode:
+		push_warning("Era：begin_panels 已经在里面了")
+		return
+	_panel_mode = true
+	_panels.clear()
+	_current_panel = {}
+	_hbox_mode = false
+	_hbox_items.clear()
+
+
+## 开始一个面板。
+## [br][br]
+## [param x] / [param y] 是相对面板块左上角的像素坐标；
+## [param width] / [param height] 是面板大小；
+## [param rows] 是这块面板占的文字行数（整块高度取所有面板的最大值）。
+func begin_panel(x: int, y: int, width: int, height: int, rows: int) -> void:
+	if not _panel_mode:
+		push_warning("Era：begin_panel 只能写在 begin_panels / end_panels 之间")
+		return
+	if _hbox_mode:
+		push_warning("Era：横排段里不能开面板，先 end_hbox")
+		return
+	if not _current_panel.is_empty():
+		push_warning("Era：上一个面板还没 end_panel")
+		return
+	_current_panel = {
+		"x": x, "y": y, "w": width, "h": height, "rows": rows, "items": [],
+	}
+
+
+## 结束当前面板。
+func end_panel() -> void:
+	if not _panel_mode:
+		push_warning("Era：end_panel 不在面板收集模式里")
+		return
+	if _hbox_mode:
+		push_warning("Era：面板里还有没结束的横排段，先 end_hbox")
+		return
+	if _current_panel.is_empty():
+		push_warning("Era：end_panel 前面没有 begin_panel")
+		return
+	_panels.append(_current_panel)
+	_current_panel = {}
+
+
+## 在当前面板里开一段横排；段里的文字和按钮从左到右排。
+## [br][br]
+## [param separation] 是段内元素间距（默认 0）。
+func begin_hbox(separation: int = 0) -> void:
+	if not _panel_mode or _current_panel.is_empty():
+		push_warning("Era：begin_hbox 只能写在面板里面")
+		return
+	if _hbox_mode:
+		push_warning("Era：begin_hbox 不能嵌套")
+		return
+	_hbox_mode = true
+	_hbox_separation = separation
+	_hbox_items.clear()
+
+
+## 结束横排段。
+func end_hbox() -> void:
+	if not _hbox_mode:
+		push_warning("Era：end_hbox 前面没有 begin_hbox")
+		return
+	_hbox_mode = false
+	_current_panel["items"].append({
+		"kind": "hbox",
+		"separation": _hbox_separation,
+		"items": _hbox_items.duplicate(),
+	})
+	_hbox_items.clear()
+
+
+## 结束收集，构建并挂上整块面板；返回面板块句柄（可接 [code]picked[/code]、调 [code]make_inert[/code]）。
+func end_panels() -> Variant:
+	if not _panel_mode:
+		push_warning("Era：end_panels 不在面板收集模式里")
+		return null
+	if _hbox_mode:
+		end_hbox()
+	if not _current_panel.is_empty():
+		end_panel()
+	_panel_mode = false
+	var panels := _panels.duplicate()
+	_panels.clear()
+	if panels.is_empty():
+		return null
+
+	var block: Variant = PANEL_BLOCK_SCENE.instantiate()
+	_screen.append_row(block)
+	block.build(panels)
+	block.picked.connect(_on_button_picked)
+	for id in block.button_ids():
+		_pending_buttons.append({"id": int(id), "row": block})
+	return block
+
+
+## 面板收集模式下把一项内容放进当前面板（或当前横排段）。
+func _panel_add_item(item: Dictionary) -> void:
+	if _hbox_mode:
+		_hbox_items.append(item)
+		return
+	if _current_panel.is_empty():
+		push_warning("Era：面板模式下的内容要写在 begin_panel / end_panel 之间")
+		return
+	_current_panel["items"].append(item)
+
+
 ## 清空屏幕，并丢弃所有还没用上的按钮。
 func clear() -> void:
 	_screen.clear_rows()
@@ -239,6 +391,11 @@ func clear() -> void:
 	_pending_grids.clear()
 	_grid_mode = false
 	_grid_items.clear()
+	_panel_mode = false
+	_panels.clear()
+	_current_panel = {}
+	_hbox_mode = false
+	_hbox_items.clear()
 
 
 # -------------------- 等待玩家 --------------------
@@ -415,6 +572,9 @@ func _run_flow(first_script: GDScript) -> void:
 
 
 func _print_text(text: String, style: Style, align: HorizontalAlignment) -> void:
+	if _panel_mode:
+		_panel_add_item({"kind": "text", "text": text, "color": _style_color(style), "align": align})
+		return
 	var row: Variant = TEXT_ROW_SCENE.instantiate()
 	_screen.append_row(row)
 	row.setup(text, _style_color(style), align)

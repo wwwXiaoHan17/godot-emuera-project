@@ -86,8 +86,8 @@ func _ready() -> void:
 		if not is_equal_approx(shaped, per_char):
 			failures.append("混排串宽 ≠ 逐字和（有 kerning？）：%s 实测=%s 逐字和=%s" % [sample, str(shaped), str(per_char)])
 
-	# 7) 本项目常用字必须全部命中
-	for ch in "查询测试选择存档读取战斗道具技能状态设置返回结局开始游戏":
+	# 7) 本项目常用字必须全部命中（含 2026-11-05 补的 ∬ 卍 · ）
+	for ch in "查询测试选择存档读取战斗道具技能状态设置返回结局开始游戏∬卍·":
 		if not font.has_char(ch.unicode_at(0)):
 			failures.append("常用字缺字形：" + ch)
 

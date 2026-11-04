@@ -1,17 +1,25 @@
 extends EraEvent
-## DayStart, 第一天的开头
+## DayStart，第 N 天的开头
 ##
-## 数据来自角色组件，不再直接读写 GameState 的扁平字段：
-## - 名字/年龄：女儿角色的 display_name / AgeComponent；
-## - 体力/精力：女儿的 StaminaComponent / EnergyComponent；
-## - 好感：女儿的 RelationComponent；
-## - 天赋：女儿的 TalentListComponent。
+## 状态和菜单用 EraFlet 面板块摆（每个面板自己写坐标/大小/占几行）：
+## - 左边面板：天数、名字/年龄、体力/精力、好感、天赋（数据来自女儿角色组件）；
+## - 右边面板：操作按钮（点完按引擎规则整块变灰）。
 ##
 ## 动作改组件 → 打印“现在” → 按键后重画本屏（面板显示更新后的数值）。
+## “看地图”切到 WorldMap 事件（大地图上的数字是地点按钮）。
 
 const Title := preload("res://content/events/type_a_title.gd")
 const CharacterPanel := preload("res://content/events/character_panel.gd")
 const ShowComponent = preload("res://content/events/show_component.gd")
+const WorldMap := preload("res://content/events/world_map.gd")
+
+## 面板布局（像素）；整块占 8 行 = 8 × 26 - 4 = 204px。
+const PANEL_HEIGHT := 182
+const PANEL_ROWS := 8
+const STATUS_X := 0
+const STATUS_W := 420
+const MENU_X := 435
+const MENU_W := 400
 
 
 func run(context: EventContext) -> GDScript:
@@ -37,22 +45,30 @@ func run(context: EventContext) -> GDScript:
 	var display_name: String = daughter.display_name if daughter.display_name != "" else "（未创建）"
 	var age_text: String = str(age_component.value) if age_component != null else "—"
 	var talent_text: String = talents.text() if talents != null else "无"
+	var relation_text: int = relations.relation_to(&"player") if relations != null else 0
 
 	Era.clear()
 	Era.print_rule()
+	Era.begin_panels()
+	Era.begin_panel(STATUS_X, 0, STATUS_W, PANEL_HEIGHT, PANEL_ROWS)
 	# TODO: 目前只读 Era.state.day 显示天数；天数推进机制（过天 +1）由后续引擎能力落地。
-	Era.print("第 %d 天" % Era.state.day, Era.Style.ACCENT, HORIZONTAL_ALIGNMENT_CENTER)
+	Era.print("第 %d 天" % Era.state.day, Era.Style.ACCENT)
 	Era.print("名字：%s　年龄：%s" % [display_name, age_text])
 	Era.print("体力：%d　精力：%d" % [stamina.value, energy.value])
-	Era.print("对玩家好感：%d" % (relations.relation_to(&"player") if relations != null else 0))
+	Era.print("对玩家好感：%d" % relation_text)
 	Era.print("天赋：%s" % talent_text)
-	Era.print_rule()
-	Era.print("要做什么？")
+	Era.end_panel()
+	Era.begin_panel(MENU_X, 0, MENU_W, PANEL_HEIGHT, PANEL_ROWS)
+	Era.print("要做什么？", Era.Style.DIM)
 	Era.print_button("出去走走", 0)
 	Era.print_button("在家休息", 1)
 	Era.print_button("查看角色面板", 2)
 	Era.print_button("返回标题", 3)
 	Era.print_button("查看女儿携带的组件", 4)
+	Era.print_button("看地图", 5)
+	Era.end_panel()
+	Era.end_panels()
+	Era.print_rule()
 
 	match await Era.input():
 		0:
@@ -75,5 +91,7 @@ func run(context: EventContext) -> GDScript:
 			return Title
 		4:
 			return ShowComponent
+		5:
+			return WorldMap
 		_:
 			return
