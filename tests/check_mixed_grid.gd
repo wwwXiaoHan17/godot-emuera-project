@@ -12,7 +12,7 @@ var _toggled_count := 0
 
 
 func _ready() -> void:
-	_palette = load("res://engine/era_palette.tres") as EraPalette
+	_palette = load("res://scripts/engine/era_palette.tres") as EraPalette
 	var failures: Array[String] = []
 
 	Era.start(DRIVER)

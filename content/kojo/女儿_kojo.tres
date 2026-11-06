@@ -1,6 +1,0 @@
-[gd_resource type="Resource" format=3 uid="uid://dhguonknqmoop"]
-
-[ext_resource type="Script" uid="uid://dqr5d44lfd18u" path="res://content/kojo/女儿_kojo.gd" id="1_book"]
-
-[resource]
-script = ExtResource("1_book")

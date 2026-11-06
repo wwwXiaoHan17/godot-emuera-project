@@ -4,7 +4,7 @@ extends Node
 ## 覆盖：追加行、行数上限裁剪、清屏、滚动归零、按宽度算分割线字数。
 ## 成功打印 CHECK OK 并退出码 0；失败打印 CHECK FAIL 并退出码 1。
 
-const EraScreenScene := preload("res://engine/era_screen.tscn")
+const EraScreenScene := preload("res://scripts/engine/era_screen.tscn")
 const TEST_SIZE := Vector2(1152, 648)
 
 

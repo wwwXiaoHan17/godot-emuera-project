@@ -18,15 +18,15 @@ extends Node
 ## 注意：引擎常量一律显式类型成 Script 再调 Object 方法；本 Godot 构建
 ## （4.8-dev7）对静态类型为 GDScript 的值调 has_method 等会编译失败且无报错输出。
 
-const DAUGHTER_PROTO := preload("res://content/characters/prototypes/女儿.tres")
-const FATHER_PROTO := preload("res://content/characters/prototypes/父亲.tres")
-const TALENT_SELECT_SCRIPT: Script = preload("res://content/events/talent_select.gd")
-const DAY_START_SCRIPT := preload("res://content/events/day_start.gd")
-const NEW_GAME_PATH := "res://content/events/new_game.gd"
-const DAY_START_PATH := "res://content/events/day_start.gd"
-const PANEL_PATH := "res://content/events/character_panel.gd"
-const SHOW_PATH := "res://content/events/show_component.gd"
-const TALENT_PATH := "res://content/events/talent_select.gd"
+const DAUGHTER_PROTO := preload("res://scripts/content/characters/prototypes/女儿.tres")
+const FATHER_PROTO := preload("res://scripts/content/characters/prototypes/父亲.tres")
+const TALENT_SELECT_SCRIPT: Script = preload("res://scripts/content/events/type_system_talent_select.gd")
+const DAY_START_SCRIPT := preload("res://scripts/content/events/day_start.gd")
+const NEW_GAME_PATH := "res://scripts/content/events/new_game.gd"
+const DAY_START_PATH := "res://scripts/content/events/day_start.gd"
+const PANEL_PATH := "res://scripts/content/events/character_panel.gd"
+const SHOW_PATH := "res://scripts/content/events/show_component.gd"
+const TALENT_PATH := "res://scripts/content/events/type_system_talent_select.gd"
 
 ## 泵键帧数上限：caress 有 3 个 print_wait，120 帧远远够；超了按“崩溃/卡住”算。
 const CARESS_MAX_FRAMES := 120

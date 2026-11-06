@@ -7,7 +7,7 @@ extends Node
 ## 3. 对齐（Label 与 BBCode 两个分支）。
 ## 成功打印 CHECK OK 并退出码 0；失败打印 CHECK FAIL 并退出码 1。
 
-const TextRowScene := preload("res://engine/rows/text_row.tscn")
+const TextRowScene := preload("res://scripts/engine/rows/text_row.tscn")
 
 
 func _ready() -> void:

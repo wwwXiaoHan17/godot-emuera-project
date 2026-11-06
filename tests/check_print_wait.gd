@@ -6,7 +6,7 @@ extends Node
 ## 成功打印 CHECK OK 并退出码 0；失败打印 CHECK FAIL 并退出码 1。
 
 const DRIVER := preload("res://tests/_drive_print_wait.gd")
-const PALETTE := preload("res://engine/era_palette.tres")
+const PALETTE := preload("res://scripts/engine/era_palette.tres")
 
 var _flow_finished := false
 

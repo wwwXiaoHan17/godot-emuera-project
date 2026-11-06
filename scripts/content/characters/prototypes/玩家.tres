@@ -1,0 +1,29 @@
+[gd_resource type="Resource" script_class="Character" format=3 uid="uid://d23486laex7mk"]
+
+[ext_resource type="Script" uid="uid://bnqqeoa04ywiv" path="res://scripts/engine/character/character_component.gd" id="1_rnyov"]
+[ext_resource type="Script" uid="uid://wusphtuxvl6w" path="res://scripts/content/characters/components/life_component.gd" id="2_ec0mi"]
+[ext_resource type="Script" uid="uid://qjocnvklwe6j" path="res://scripts/engine/character/relation_entry.gd" id="3_qlxk4"]
+[ext_resource type="Script" uid="uid://da6epjx54d3eh" path="res://scripts/engine/character/relation_component.gd" id="4_vu8u2"]
+[ext_resource type="Script" uid="uid://vugf6mjds2ur" path="res://scripts/engine/character/character.gd" id="5_8xk3d"]
+
+[sub_resource type="Resource" id="Resource_x60ec"]
+script = ExtResource("2_ec0mi")
+display_name = "生命"
+
+[sub_resource type="Resource" id="Resource_hmwax"]
+script = ExtResource("3_qlxk4")
+target = &"daughter"
+relation = 50
+
+[sub_resource type="Resource" id="Resource_ycv5l"]
+script = ExtResource("4_vu8u2")
+relations = Array[ExtResource("3_qlxk4")]([SubResource("Resource_hmwax")])
+display_name = "关系"
+
+[resource]
+script = ExtResource("5_8xk3d")
+id = &"player"
+display_name = "你"
+callname = "你"
+components = Array[ExtResource("1_rnyov")]([SubResource("Resource_x60ec"), SubResource("Resource_ycv5l")])
+is_prototype = true

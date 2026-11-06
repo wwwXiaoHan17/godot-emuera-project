@@ -5,10 +5,10 @@ extends Node
 ## 称呼回退/自定义、无 RelationComponent 时的回退、CharacterBook。
 ## 成功打印 CHECK OK 并退出码 0；失败打印 CHECK FAIL 并退出码 1。
 
-const PLAYER_PROTO := preload("res://content/characters/prototypes/玩家.tres")
-const DAUGHTER_PROTO := preload("res://content/characters/prototypes/女儿.tres")
-const MAID_PROTO := preload("res://content/characters/prototypes/女仆.tres")
-const FATHER_PROTO := preload("res://content/characters/prototypes/父亲.tres")
+const PLAYER_PROTO := preload("res://scripts/content/characters/prototypes/玩家.tres")
+const DAUGHTER_PROTO := preload("res://scripts/content/characters/prototypes/女儿.tres")
+const MAID_PROTO := preload("res://scripts/content/characters/prototypes/女仆.tres")
+const FATHER_PROTO := preload("res://scripts/content/characters/prototypes/父亲.tres")
 
 var _changed_target: StringName = &""
 var _changed_value := -1

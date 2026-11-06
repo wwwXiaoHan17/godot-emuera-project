@@ -5,7 +5,7 @@ extends Node
 ## 未配置时拒绝完成。
 ## 成功打印 CHECK OK 并退出码 0；失败打印 CHECK FAIL 并退出码 1。
 
-const PAGE := preload("res://content/screens/character_create.tscn")
+const PAGE := preload("res://scripts/content/screens/character_create.tscn")
 
 var _finished_count := 0
 var _result: Variant = null

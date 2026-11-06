@@ -3,8 +3,8 @@ extends EraEvent
 ##
 ## 跑法：F6 打开 tests/demo_kojo.tscn
 
-const PLAYER_PROTO := preload("res://content/characters/prototypes/玩家.tres")
-const DAUGHTER_PROTO := preload("res://content/characters/prototypes/女儿.tres")
+const PLAYER_PROTO := preload("res://scripts/content/characters/prototypes/玩家.tres")
+const DAUGHTER_PROTO := preload("res://scripts/content/characters/prototypes/女儿.tres")
 
 
 func run(context: EventContext) -> GDScript:

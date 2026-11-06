@@ -17,7 +17,7 @@ config/icon="res://icon.svg"
 
 [autoload]
 
-Era="*res://engine/era.gd"
+Era="*res://scripts/engine/era.gd"
 
 [display]
 
@@ -29,9 +29,15 @@ window/vsync/vsync_mode=0
 [file_customization]
 
 folder_colors={
-"res://content/": "red",
-"res://engine/": "red",
-"res://scenes/": "green"
+"res://assets/": "blue",
+"res://docs/": "green",
+"res://resources/": "red",
+"res://scenes/": "red",
+"res://scripts/": "red",
+"res://scripts/content/": "red",
+"res://scripts/engine/": "red",
+"res://tests/": "gray",
+"res://tools/": "gray"
 }
 
 [gui]

@@ -6,7 +6,7 @@ extends Node
 ## 看地图（eraTW 地图，点地点 06）→ 回到第 1 天 → 角色面板 → 数值变化 → 重画。
 ## 成功打印 CHECK OK 并退出码 0；失败打印 CHECK FAIL 并退出码 1。
 
-const TITLE := preload("res://content/events/type_a_title.gd")
+const TITLE := preload("res://scripts/content/events/type_system_title.gd")
 const DAY_START_ROWS := 3      # 分割线 / 面板块 / 分割线
 const ACTION_ROWS := 5         # 第 1 天 + 动作结果 2 行
 

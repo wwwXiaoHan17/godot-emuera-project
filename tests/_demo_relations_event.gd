@@ -75,7 +75,7 @@ func _ensure_characters() -> void:
 	if book.find(&"player") != null:
 		return
 
-	book.add((preload("res://content/characters/prototypes/玩家.tres") as Character).spawn(&"player"))
-	book.add((preload("res://content/characters/prototypes/女儿.tres") as Character).spawn(&"daughter"))
-	book.add((preload("res://content/characters/prototypes/女仆.tres") as Character).spawn(&"maid"))
+	book.add((preload("res://scripts/content/characters/prototypes/玩家.tres") as Character).spawn(&"player"))
+	book.add((preload("res://scripts/content/characters/prototypes/女儿.tres") as Character).spawn(&"daughter"))
+	book.add((preload("res://scripts/content/characters/prototypes/女仆.tres") as Character).spawn(&"maid"))
 	book.protagonist_id = &"player"

@@ -5,7 +5,7 @@ extends Node
 ## 确认后写女儿的天赋组件并进入第 1 天。
 ## 成功打印 CHECK OK 并退出码 0；失败打印 CHECK FAIL 并退出码 1。
 
-const TALENT_SELECT := preload("res://content/events/talent_select.gd")
+const TALENT_SELECT := preload("res://scripts/content/events/type_system_talent_select.gd")
 
 
 func _ready() -> void:

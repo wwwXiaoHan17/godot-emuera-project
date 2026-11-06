@@ -22,10 +22,10 @@ desktop.ini
 *.log
 *.tmp
 
-# AI 产物 / 工作快照
-/docs/
+# AI 产物 / 工作快照（用户手写的更新日志仍要入库）
+/docs/*
+!/docs/user_create_change_logs/
 /experiment/
-/SKILL_INSTALL_REPORT.md
 
 # 测试文件
 /tests/

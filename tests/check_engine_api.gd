@@ -8,7 +8,7 @@ extends Node
 ## FlagTableComponent 行为与信号。
 ## 成功打印 CHECK OK 并退出码 0；失败打印 CHECK FAIL 并退出码 1。
 
-const KOJO_TRES := preload("res://content/kojo/女儿_kojo.tres")
+const KOJO_TRES := preload("res://scripts/content/kojo/女儿_kojo.tres")
 const CHARA_DIR := "res://tests/fixtures/chara"
 
 

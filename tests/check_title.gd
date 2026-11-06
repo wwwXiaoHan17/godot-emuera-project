@@ -4,7 +4,7 @@ extends Node
 ## 覆盖：标题屏行数、“继续游戏 / 关于游戏”两条会回到标题的路径。
 ## 成功打印 CHECK OK 并退出码 0；失败打印 CHECK FAIL 并退出码 1。
 
-const TITLE := preload("res://content/events/type_a_title.gd")
+const TITLE := preload("res://scripts/content/events/type_system_title.gd")
 
 
 func _ready() -> void:

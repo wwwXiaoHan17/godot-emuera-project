@@ -1,0 +1,6 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" uid="uid://bso40ljqclnu" path="res://scripts/engine/rows/grid_row.gd" id="1_row"]
+
+[node name="GridRow" type="GridContainer"]
+script = ExtResource("1_row")

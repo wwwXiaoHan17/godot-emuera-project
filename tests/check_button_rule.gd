@@ -5,8 +5,8 @@ extends Node
 ## RuleRow：只做最简单的“符号重复”，长度由外部传入。
 ## 成功打印 CHECK OK 并退出码 0；失败打印 CHECK FAIL 并退出码 1。
 
-const ButtonRowScene := preload("res://engine/rows/button_row.tscn")
-const RuleRowScene := preload("res://engine/rows/rule_row.tscn")
+const ButtonRowScene := preload("res://scripts/engine/rows/button_row.tscn")
+const RuleRowScene := preload("res://scripts/engine/rows/rule_row.tscn")
 
 
 func _ready() -> void:

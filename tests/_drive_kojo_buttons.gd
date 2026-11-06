@@ -1,8 +1,8 @@
 extends EraEvent
 ## 校验用事件：跑一次带按钮的口上，把返回值写进状态。
 
-const PLAYER_PROTO := preload("res://content/characters/prototypes/玩家.tres")
-const DAUGHTER_PROTO := preload("res://content/characters/prototypes/女儿.tres")
+const PLAYER_PROTO := preload("res://scripts/content/characters/prototypes/玩家.tres")
+const DAUGHTER_PROTO := preload("res://scripts/content/characters/prototypes/女儿.tres")
 
 
 func run(context: EventContext) -> GDScript:

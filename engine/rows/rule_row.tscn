@@ -1,6 +1,0 @@
-[gd_scene format=3 uid="uid://btjbnnd2q1op"]
-
-[ext_resource type="Script" uid="uid://dmh7sm3xs0ina" path="res://engine/rows/rule_row.gd" id="1_row"]
-
-[node name="RuleRow" type="Label" unique_id=894552885]
-script = ExtResource("1_row")

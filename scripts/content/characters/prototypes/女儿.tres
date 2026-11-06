@@ -1,0 +1,62 @@
+[gd_resource type="Resource" script_class="Character" format=3 uid="uid://ssgh4v2btjub"]
+
+[ext_resource type="Script" uid="uid://bnqqeoa04ywiv" path="res://scripts/engine/character/character_component.gd" id="1_cj5ni"]
+[ext_resource type="Script" uid="uid://wusphtuxvl6w" path="res://scripts/content/characters/components/life_component.gd" id="2_x8gut"]
+[ext_resource type="Resource" uid="uid://dhguonknqmoop" path="res://scripts/content/kojo/女儿_kojo.tres" id="3_pvkxv"]
+[ext_resource type="Script" uid="uid://cj8j4wosxtaur" path="res://scripts/engine/kojo/kojo_component.gd" id="4_jiylc"]
+[ext_resource type="Script" uid="uid://42w0edr63lus" path="res://scripts/content/characters/components/stamina_component.gd" id="5_3i6le"]
+[ext_resource type="Script" uid="uid://s15c6gy5u48g" path="res://scripts/content/characters/components/energy_component.gd" id="6_odru1"]
+[ext_resource type="Script" uid="uid://bptm7ip8xasq7" path="res://scripts/content/characters/components/talent_component.gd" id="7_47wsq"]
+[ext_resource type="Script" uid="uid://qobat0sujkci" path="res://scripts/content/characters/components/sexy_component.gd" id="8_qnais"]
+[ext_resource type="Script" uid="uid://cachcwxxjf8r4" path="res://scripts/content/characters/components/age_component.gd" id="9_528mp"]
+[ext_resource type="Script" uid="uid://qjocnvklwe6j" path="res://scripts/engine/character/relation_entry.gd" id="10_mwk1b"]
+[ext_resource type="Script" uid="uid://da6epjx54d3eh" path="res://scripts/engine/character/relation_component.gd" id="11_k4ihk"]
+[ext_resource type="Script" uid="uid://vugf6mjds2ur" path="res://scripts/engine/character/character.gd" id="12_ao3mt"]
+
+[sub_resource type="Resource" id="Resource_7f7fh"]
+script = ExtResource("2_x8gut")
+display_name = "生命"
+
+[sub_resource type="Resource" id="Resource_ytpbw"]
+script = ExtResource("4_jiylc")
+book = ExtResource("3_pvkxv")
+display_name = "口上"
+
+[sub_resource type="Resource" id="Resource_cdgx6"]
+script = ExtResource("5_3i6le")
+display_name = "体力"
+
+[sub_resource type="Resource" id="Resource_l0c07"]
+script = ExtResource("6_odru1")
+display_name = "精力"
+
+[sub_resource type="Resource" id="Resource_8k2si"]
+script = ExtResource("7_47wsq")
+display_name = "天赋"
+
+[sub_resource type="Resource" id="Resource_raou0"]
+script = ExtResource("8_qnais")
+display_name = "性欲"
+metadata/_custom_type_script = "uid://qobat0sujkci"
+
+[sub_resource type="Resource" id="Resource_jq34i"]
+script = ExtResource("9_528mp")
+display_name = "年龄"
+
+[sub_resource type="Resource" id="Resource_o6t7m"]
+script = ExtResource("10_mwk1b")
+target = &"player"
+relation = 20
+
+[sub_resource type="Resource" id="Resource_e0jrr"]
+script = ExtResource("11_k4ihk")
+relations = Array[ExtResource("10_mwk1b")]([SubResource("Resource_o6t7m")])
+display_name = "关系"
+
+[resource]
+script = ExtResource("12_ao3mt")
+id = &"daughter"
+display_name = "阿丽丝"
+callname = "女儿"
+components = Array[ExtResource("1_cj5ni")]([SubResource("Resource_7f7fh"), SubResource("Resource_ytpbw"), SubResource("Resource_cdgx6"), SubResource("Resource_l0c07"), SubResource("Resource_8k2si"), SubResource("Resource_raou0"), SubResource("Resource_jq34i"), SubResource("Resource_e0jrr")])
+is_prototype = true

@@ -1,0 +1,17 @@
+[gd_scene format=3 uid="uid://7dy0ox72bpao"]
+
+[ext_resource type="Script" uid="uid://dl0k421t7l06m" path="res://scripts/engine/rows/text_row.gd" id="1_row"]
+
+[node name="TextRow" type="MarginContainer" unique_id=533433316]
+script = ExtResource("1_row")
+
+[node name="Label" type="Label" parent="." unique_id=1712375013]
+layout_mode = 2
+autowrap_mode = 3
+
+[node name="RichTextLabel" type="RichTextLabel" parent="." unique_id=1361120757]
+visible = false
+layout_mode = 2
+bbcode_enabled = true
+fit_content = true
+scroll_active = false

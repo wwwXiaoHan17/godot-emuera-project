@@ -95,7 +95,7 @@ godot --headless --path . res://tests/check_font_contract.tscn
 ERB 字符画整串宽度（`┏━━━━━━━━━━┓` = 12 格、`▰▰▰▰▱▱▱▱` = 8 个半角格）/
 混排串宽 = 逐字宽之和（无 kerning）/ 缺字清单与 `charset_missing.txt` 完全一致。
 
-运行期还有 `engine/font_guard.gd`：文字进入行部件时检查主题字体缺字，
+运行期还有 `scripts/engine/font_guard.gd`：文字进入行部件时检查主题字体缺字，
 缺字时 `push_warning("FONT_GLYPH_MISSING U+…") `，同一码点整局只报一次。
 
 ## 授权

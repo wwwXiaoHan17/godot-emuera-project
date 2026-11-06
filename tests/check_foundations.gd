@@ -5,16 +5,16 @@ extends Node
 ## [br][br]
 ## 成功打印 CHECK OK 并退出码 0；失败打印 CHECK FAIL 并退出码 1。
 
-const PaletteScript := preload("res://engine/era_palette.gd")
-const StateScript := preload("res://engine/game_state.gd")
-const EventScript := preload("res://engine/era_event.gd")
+const PaletteScript := preload("res://scripts/engine/era_palette.gd")
+const StateScript := preload("res://scripts/engine/game_state.gd")
+const EventScript := preload("res://scripts/engine/era_event.gd")
 
 
 func _ready() -> void:
 	var failures: Array[String] = []
 
 	# 1) 调色板：能加载、是 EraPalette、四个颜色合理
-	var palette: Resource = load("res://engine/era_palette.tres")
+	var palette: Resource = load("res://scripts/engine/era_palette.tres")
 	if palette == null:
 		failures.append("调色板 era_palette.tres 没加载到")
 	elif not (palette is PaletteScript):
